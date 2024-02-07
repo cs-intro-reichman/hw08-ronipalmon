@@ -35,40 +35,52 @@ class PlayList {
      *  If the list is full, does nothing and returns false.
      *  Otherwise, appends the track and returns true. */
     public boolean add(Track track) {
-        if (playlist.length() >= maxSize){
-            return false;
-        }else{
-            playlist = playlist + track;
+        if (this.size < this.maxSize){
+            this.track[this.size] = track;
+            this.size ++;
             return true;
         }
-        
+        return false;
     }
 
     /** Returns the data of this list, as a string. Each track appears in a separate line. */
     //// For an efficient implementation, use StringBuilder.
     public String toString() {
-        for (int i=0; i<playlist.length(); i++){
-            System.our.println(Track.toString(playlist[i]));
-
+        StringBuilder playlist = new StringBuilder;
+        for (int i=0; i< this.size; i++){
+            playlist.append(this.track[i]);
+            playlist.append("\n");
         }
-        return "";
+        String result = playlist.toString();
+        return "result";
     }
 
     /** Removes the last track from this list. If the list is empty, does nothing. */
      public void removeLast() {
-        //// replace this comment with your code
+        if (this.size >= 1){
+            this.tracks[this.size-1] = null;
+            this.size--;
+            
+        }
     }
     
     /** Returns the total duration (in seconds) of all the tracks in this list.*/
     public int totalDuration() {
-        //// replace the following statement with your code
-        return 0;
+        int sum = 0;
+        for (int i=0; i< this.size; i++){
+            sum += this.track[i].getDuration;
+        }
+        return sum;
     }
 
     /** Returns the index of the track with the given title in this list.
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
-        //// replace the following statement with your code
+        for (int i=0; i<this.size; i++){
+            if (this.track[i].getTitle == title){
+                return i;
+            }
+        }
         return -1;
     }
 

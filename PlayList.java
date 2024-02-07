@@ -68,7 +68,7 @@ class PlayList {
     public int totalDuration() {
         int sum = 0;
         for (int i=0; i< this.size; i++){
-            sum += this.track[i].getDuration;
+            sum += this.tracks[i].getDuration;
         }
         return sum;
     }
@@ -77,7 +77,7 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) {
         for (int i=0; i<this.size; i++){
-            if (this.track[i].getTitle == title){
+            if (this.tracks[i].getTitle().equals(title)){
                 return i;
             }
         }

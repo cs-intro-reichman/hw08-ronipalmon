@@ -91,34 +91,78 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        //// replace the following statement with your code
-        return false;
-    }
+        if (i<0 || i>this.maxSize || this.size == this.maxSize){
+            return false;
+        }
+        if (this.size == i){
+            this.tracks[i] = track;
+            this.size ++;
+            return true;
+        }
+        for (int j = this.size; j>i; j--){
+            this.tracks[j]= this.tracks[j-1];
+        }
+        this.tracks[i] = track;
+        this.size ++;
+        return true;
+        }
+    
      
     /** Removes the track in the given index from this list.
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        //// replace this comment with your code
+        if (i<0 || i>this.maxSize || this.size == 0){
+            return -1;
+        }
+        this.tracks[i] = null
+
+        if (this.size-1 == i){
+            this.size --;
+           
+        }else{
+        for (int j = i; j<this.size-1>; j++){
+            this.tracks[j+1]= this.tracks[j];
+        }
     }
+        this.size --;
+        return true;
+        }
+    
 
     /** Removes the first track that has the given title from this list.
      *  If such a track is not found, or the list is empty, or the given index
      *  is negative or too big for this list, does nothing. */
     public void remove(String title) {
-        //// replace this comment with your code
+        for (int i = 0; i < this.size; i++){
+            if (this.tracks[i].getTitle().equals(title)){
+                remove(i);
+                break;
+            }
+        }
     }
 
     /** Removes the first track from this list. If the list is empty, does nothing. */
     public void removeFirst() {
-        //// replace this comment with your code
+        if (this.size>0){
+            for (int i =1; i < this.size; i++){
+                this.tracks[i-1] = this.tracks[i] 
+            }
+        }
+        this.size--;
     }
     
     /** Adds all the tracks in the other list to the end of this list. 
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
      public void add(PlayList other) {
-        //// replace this comment with your code
+        if (this.size + other.getSize() <= this.maxSize){
+            
+            for (int j=0; j< other.getSize(); j++){
+                this.tracks[this.size] = other.tracks[j];
+                this.size ++;
+            }
+        }
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
@@ -128,8 +172,20 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        //// replace the following statement with your code
-        return 0;
+        int index;
+        if (start < 0 || start > this.size -1 ){
+            index = -1
+        }else{
+            int result = this.tracks[start].getDuration();
+            for (int i = start +1; i < this.size; i ++){
+                if (this.tracks[i].getDuration() > result){
+                    result = this.tracks[i].getDuration();
+                    index = i;
+                }
+
+            }
+        }
+        return index;
     }
 
     /** Returns the title of the shortest track in this list. 

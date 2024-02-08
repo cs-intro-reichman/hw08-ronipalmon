@@ -112,19 +112,18 @@ class PlayList {
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        if (i<0 || i>this.maxSize || this.size == 0){
+        if (i<0 || i>=this.maxSize || this.size == 0){
             return;
         }
-        this.tracks[i] = null;
 
         if (this.size-1 == i){
-            this.size --;
+            this.tracks[i] = null;
            
         }else{
-        for (int j = i; j<this.size-1; j++){
-            this.tracks[j]= this.tracks[j+1];
+            for (int j = i; j<this.size-1; j++){
+                this.tracks[j]= this.tracks[j+1];
+            }
         }
-    }
         this.size --;
         
         }
@@ -194,7 +193,7 @@ class PlayList {
         if (this.size == 0){
             return null;
         }
-        
+
         return tracks[minIndex(0)].getTitle();
     }
 

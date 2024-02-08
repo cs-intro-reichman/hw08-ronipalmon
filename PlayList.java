@@ -122,7 +122,7 @@ class PlayList {
            
         }else{
         for (int j = i; j<this.size-1; j++){
-            this.tracks[j+1]= this.tracks[j];
+            this.tracks[j]= this.tracks[j+1];
         }
     }
         this.size --;
@@ -191,6 +191,10 @@ class PlayList {
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */
     public String titleOfShortestTrack() {
+        if (this.size == 0){
+            return null;
+        }
+        
         return tracks[minIndex(0)].getTitle();
     }
 

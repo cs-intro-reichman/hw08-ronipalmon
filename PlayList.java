@@ -112,7 +112,7 @@ class PlayList {
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        if (i<0 || i>=this.maxSize || this.size == 0){
+        if (i<0 || i>=this.size || this.size == 0){
             return;
         }
 

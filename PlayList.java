@@ -113,21 +113,16 @@ class PlayList {
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        if (i<0 || i>=this.size || this.size == 0){
-            return;
-        }
-
-        if (i == this.size-1 ){
-            this.tracks[i] = null;
-           
-        }else{
-            for (int j = i; j<this.size-1; j++){
-                this.tracks[j]= this.tracks[j+1];
+        if (i >= 0 && i < this.size) {
+            for (int j = i; j < this.size - 1; j++) {
+                this.tracks[j] = this.tracks[j + 1];
             }
+            
+            this.tracks[this.size - 1] = null;
+            
+            this.size--;
         }
-        this.size --;
-        
-        }
+    }
     
 
     /** Removes the first track that has the given title from this list.
@@ -142,14 +137,16 @@ class PlayList {
 
     /** Removes the first track from this list. If the list is empty, does nothing. */
     public void removeFirst() {
-        if (this.size>0){
-            for (int i =1; i <= this.size; i++){
-                this.tracks[i-1] = this.tracks[i];
+        if (this.size == 0){
+            return;
+        }
+        for (int i =1; i <= this.size; i++){
+            this.tracks[i-1] = this.tracks[i];
             }
-            this.size--;
+        this.size--;
         }
        
-    }
+    
     
     /** Adds all the tracks in the other list to the end of this list. 
      *  If the total size of both lists is too large, does nothing. */
@@ -201,15 +198,12 @@ class PlayList {
      *  rather than returning a new, sorted playlist, the method sorts
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
-        for(int i =0; i<this.size; i++)
+        for(int i =0; i<this.size-1; i++)
         {
             int smallestIndex = minIndex(i);
-            if(i < smallestIndex)
-            {
-                Track temp = this.tracks[i];
-                this.tracks[i] = this.tracks[smallestIndex];
-                this.tracks[smallestIndex] = temp;
-            }
+            Track temp = this.tracks[i];
+            this.tracks[i] = this.tracks[smallestIndex];
+            this.tracks[smallestIndex] = temp;
         }
     }
 }

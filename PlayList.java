@@ -36,7 +36,7 @@ class PlayList {
      *  Otherwise, appends the track and returns true. */
     public boolean add(Track track) {
         if (this.size < this.maxSize){
-            this.track[this.size] = track;
+            this.tracks[this.size] = track;
             this.size ++;
             return true;
         }
@@ -46,9 +46,9 @@ class PlayList {
     /** Returns the data of this list, as a string. Each track appears in a separate line. */
     //// For an efficient implementation, use StringBuilder.
     public String toString() {
-        StringBuilder playlist = new StringBuilder;
+        StringBuilder playlist = new StringBuilder();
         for (int i=0; i< this.size; i++){
-            playlist.append(this.track[i]);
+            playlist.append(this.tracks[i]);
             playlist.append("\n");
         }
         String result = playlist.toString();
@@ -68,7 +68,7 @@ class PlayList {
     public int totalDuration() {
         int sum = 0;
         for (int i=0; i< this.size; i++){
-            sum += this.tracks[i].getDuration;
+            sum += this.tracks[i].getDuration();
         }
         return sum;
     }
@@ -113,20 +113,20 @@ class PlayList {
      *  does nothing and returns -1. */
     public void remove(int i) {
         if (i<0 || i>this.maxSize || this.size == 0){
-            return -1;
+            return;
         }
-        this.tracks[i] = null
+        this.tracks[i] = null;
 
         if (this.size-1 == i){
             this.size --;
            
         }else{
-        for (int j = i; j<this.size-1>; j++){
+        for (int j = i; j<this.size-1; j++){
             this.tracks[j+1]= this.tracks[j];
         }
     }
         this.size --;
-        return true;
+        
         }
     
 
@@ -146,7 +146,7 @@ class PlayList {
     public void removeFirst() {
         if (this.size>0){
             for (int i =1; i < this.size; i++){
-                this.tracks[i-1] = this.tracks[i] 
+                this.tracks[i-1] = this.tracks[i];
             }
         }
         this.size--;
@@ -172,9 +172,9 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        int index;
-        if (start < 0 || start > this.size -1 ){
-            index = -1
+        int index=0;
+        if (start < 0 || start > this.size ){
+            index = -1;
         }else{
             int result = this.tracks[start].getDuration();
             for (int i = start +1; i < this.size; i ++){
@@ -199,8 +199,15 @@ class PlayList {
      *  rather than returning a new, sorted playlist, the method sorts
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
-        // Uses the selection sort algorithm,  
-        // calling the minIndex method in each iteration.
-        //// replace this statement with your code
+        for(int i =0; i<this.size-1; i++)
+        {
+            int smallestIndex = minIndex(i);
+            if(i!= smallestIndex)
+            {
+                Track temp = this.tracks[i];
+                this.tracks[i] = this.tracks[smallestIndex];
+                this.tracks[smallestIndex] = temp;
+            }
+        }
     }
 }

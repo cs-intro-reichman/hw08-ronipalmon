@@ -171,21 +171,26 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        int index=start;
-        int result = this.tracks[start].getDuration();
-        if (start < 0 || start > this.size -1 ){
-            index = -1;
-        }else{
-            for (int i = start +1; i < this.size; i ++){
-                if (this.tracks[i].getDuration() < result){
-                    result = this.tracks[i].getDuration();
+        int min = this.tracks[start].getDuration();
+        int index = start;
+        if(start <0 || start>this.size)
+        {
+            return -1;
+        }
+        else 
+        {
+            for(int i = start+1; i<this.size; i++)
+            {
+                if(this.tracks[i].getDuration()<min)
+                {
+                    min = this.tracks[i].getDuration();
                     index = i;
                 }
-
             }
         }
         return index;
     }
+
 
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */

@@ -146,8 +146,9 @@ class PlayList {
             for (int i =1; i <= this.size; i++){
                 this.tracks[i-1] = this.tracks[i];
             }
+            this.size--;
         }
-        this.size--;
+       
     }
     
     /** Adds all the tracks in the other list to the end of this list. 
@@ -159,7 +160,7 @@ class PlayList {
             
             for (int j=0; j< other.getSize(); j++){
                 this.tracks[this.size] = other.getTrack(j);
-                this.size ++;
+                
             }
             this.size += other.getSize();
         }
@@ -203,7 +204,7 @@ class PlayList {
         for(int i =0; i<this.size; i++)
         {
             int smallestIndex = minIndex(i);
-            if(i > smallestIndex)
+            if(i < smallestIndex)
             {
                 Track temp = this.tracks[i];
                 this.tracks[i] = this.tracks[smallestIndex];

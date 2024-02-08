@@ -48,11 +48,10 @@ class PlayList {
     public String toString() {
         StringBuilder playlist = new StringBuilder();
         for (int i=0; i< this.size; i++){
-            playlist.append(this.tracks[i]);
-            playlist.append("\n");
+            playlist.append(this.tracks[i]).append("\n");
         }
         String result = playlist.toString();
-        return "result";
+        return result;
     }
 
     /** Removes the last track from this list. If the list is empty, does nothing. */
@@ -116,7 +115,7 @@ class PlayList {
             return;
         }
 
-        if (this.size-1 == i){
+        if (i == this.size-1 ){
             this.tracks[i] = null;
            
         }else{
@@ -177,7 +176,7 @@ class PlayList {
         }else{
             int result = this.tracks[start].getDuration();
             for (int i = start +1; i < this.size; i ++){
-                if (this.tracks[i].getDuration() > result){
+                if (this.tracks[i].getDuration() < result){
                     result = this.tracks[i].getDuration();
                     index = i;
                 }
